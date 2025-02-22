@@ -1,4 +1,0 @@
-Chcujc
-Giigiv
-Ghg
-Ghh
