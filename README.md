@@ -1,4 +1,0 @@
-Xycccy
- Gcch
- Cchch
- Vccu
