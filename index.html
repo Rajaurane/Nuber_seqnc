@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Number Quiz | RyanQuiz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .quiz-container {
+            max-width: 600px;
+            width: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            padding: 25px;
+        }
+        .timer-bar {
+            height: 5px;
+            background: #ffd93d;
+            animation: timer 20s linear forwards;
+        }
+        @keyframes timer {
+            from { width: 100%; }
+            to { width: 0; }
+        }
+        .question {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 1.4em;
+            margin: 20px 0;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+        .option-btn {
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.95);
+            color: #2d3436;
+            font-size: 1.1em;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .option-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        .feedback {
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin: 20px 0;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .social-links {
+            display: flex;
+            gap: 15px;
+            padding: 20px;
+            justify-content: center;
+            background: rgba(0,0,0,0.1);
+        }
+        .social-btn {
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white !important;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.2s ease;
+        }
+        .social-btn:hover {
+            transform: translateY(-2px);
+        }
+        .correct { background: #48bb78 !important; color: white !important; }
+        .wrong { background: #f56565 !important; color: white !important; }
+        .disabled { opacity: 0.6; pointer-events: none; }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="timer-bar"></div>
+        <h2>🎮 Number Sequence Challenge 🧠</h2>
+        <div class="question">🔢 3, 8, 15, 24, 35, ___ ?</div>
+        <div class="options-grid">
+            <button class="option-btn">45</button>
+            <button class="option-btn" id="correct-answer">48</button>
+            <button class="option-btn">50</button>
+            <button class="option-btn">42</button>
+        </div>
+        <div class="feedback" id="feedback"></div>
+        <div class="social-links">
+            <a href="https://wp.me/pgmqvI-4" class="social-btn" style="background: #4a5568;" target="_blank">
+                <i class="fas fa-blog"></i> Blog Post
+            </a>
+            <a href="https://youtube.com/@ryanquiz-k7n" class="social-btn" style="background: #ff0000;" target="_blank">
+                <i class="fab fa-youtube"></i> YouTube
+            </a>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const options = document.querySelectorAll('.option-btn');
+            const feedback = document.getElementById('feedback');
+            let answered = false;
+            setTimeout(() => {
+                if (!answered) {
+                    answered = true;
+                    showFeedback("⏰ Time's up! The correct answer is 48", 'timeout');
+                    disableOptions();
+                }
+            }, 20000);
+            options.forEach(option => {
+                option.addEventListener('click', (e) => {
+                    if (answered) return;
+                    answered = true;
+                    const isCorrect = e.target.id === 'correct-answer';
+                    const resultType = isCorrect ? 'correct' : 'wrong';
+                    const message = isCorrect 
+                        ? "🎉 Correct! You're a math genius!" 
+                        : "😞 Oops! Correct answer: 48 (35 +13)";
+                    e.target.classList.add(resultType);
+                    showFeedback(message, resultType);
+                    disableOptions();
+                });
+            });
+            function showFeedback(text, type) {
+                feedback.textContent = text;
+                feedback.style.display = 'block';
+                feedback.classList.add(type);
+            }
+            function disableOptions() {
+                options.forEach(btn => {
+                    btn.classList.add('disabled');
+                    if (btn.id === 'correct-answer') {
+                        btn.classList.add('correct');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
