@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Number Quiz</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Quiz Container -->
+    <div class="quiz-frame">
+        <div class="timer" id="timer"></div>
+        
+        <div class="quiz-body">
+            <h1>🔢 Number Sequence Puzzle</h1>
+            <div class="question-box">
+                <div class="sequence">3, 8, 15, 24, 35, __ ?</div>
+                <div class="options-grid">
+                    <button class="quiz-btn" data-answer="wrong">45</button>
+                    <button class="quiz-btn" data-answer="correct">48</button>
+                    <button class="quiz-btn" data-answer="wrong">50</button>
+                    <button class="quiz-btn" data-answer="wrong">42</button>
+                </div>
+                <div class="result-box" id="result"></div>
+            </div>
+        </div>
+        
+        <div class="social-panel">
+            <a href="https://wp.me/pgmqvI-4" class="social-link web">
+                <i class="fas fa-globe"></i> Web Post
+            </a>
+            <a href="https://youtube.com/@ryanquiz-k7n" class="social-link yt">
+                <i class="fab fa-youtube"></i> YouTube
+            </a>
+        </div>
+    </div>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>
